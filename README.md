@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# React_Redux-Forms
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simple redux-form implementation using react-redux that persists data in state and provides other features like easy error handling and better user experience.
 
 ## Available Scripts
 
