@@ -1,4 +1,5 @@
-import {Control,LocalForm,Errors} from 'react-redux-form';
+import React,{Component} from 'react';
+import {Control,LocalForm,Form,Errors} from 'react-redux-form';
 import {Label, Row,Col,Button} from 'reactstrap';
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -6,11 +7,17 @@ const minLength = (len) => (val) => val && (val.length >= len);
 
 const isNumber = (val) => !isNaN(Number(val));
 const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
-function handleSubmit(values){
-    alert(JSON.stringify(values));
-}
-function MyForm(props){
-    
+
+class MyForm extends Component{
+    constructor(props){
+        super(props);
+        this.handleSubmit=this.handleSubmit.bind(this);
+    }
+    handleSubmit(values){
+        alert(JSON.stringify(values));
+        this.props.resetFeedbackForm();
+    }
+    render(){
     return (
         <div className="container">
         <div className="row row-content">
@@ -18,7 +25,7 @@ function MyForm(props){
                 <h4>This is the form</h4>
             </div>
             <div className="col-12 col-md-9">
-                <LocalForm onSubmit={(values)=>handleSubmit(values)}>
+                <Form model="feedback" onSubmit={(values)=>this.handleSubmit(values)}>
                     <Row className="form-group">
                         <Label htmlFor="firstname" md={2}>First Name</Label>
                         <Col md={10}>
@@ -132,10 +139,11 @@ function MyForm(props){
                                     <Button type="submit" color="primary" >Send Feedback</Button>
                                 </Col>
                             </Row>
-                </LocalForm>
+                </Form>
             </div>
         </div>
         </div>
     );
+      }
 }
 export default MyForm;
